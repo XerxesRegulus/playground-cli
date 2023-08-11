@@ -6,10 +6,14 @@ class Product
       product_file = File.read('./products.json')
       @products_json ||= JSON.parse(product_file)
 
-      puts 'Avaliable Products:'
+      output_text = ''
+      output_text += "Available Products: \n"
       @products_json.each do |product|
-        puts "#{product['uuid']} : #{product['name']} : #{product['price']}"
+        output_text += "#{product['uuid']} : #{product['name']} : #{product['price']} \n"
       end
+
+      puts output_text
+      output_text
     end
   end
 end
