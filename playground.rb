@@ -12,8 +12,8 @@ option_parser = OptionParser.new do |parser|
   parser.on('-l', '--list', 'lists the available products') do |l|
     options[:product][:list] = l
   end
-  parse.on('-ac', '--add-to-cart=[UUID]', "adds a product to the cart using the product's UUID") do |ac|
-    options[:cart][:add] = ac
+  parser.on('--add-to-cart UUID', "adds a product to the cart using the product's UUID") do |uuid|
+    options[:cart][:add] = uuid
   end
 end.parse!
 
