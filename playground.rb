@@ -1,5 +1,4 @@
 require 'optparse'
-require 'pry'
 
 Dir['./lib/*rb'].each { |file| require file }
 
