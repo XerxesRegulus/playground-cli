@@ -4,12 +4,16 @@ require 'pry'
 Dir['./lib/*rb'].each { |file| require file }
 
 options = {
-  product: {}
+  product: {},
+  cart: {}
 }
 
 option_parser = OptionParser.new do |parser|
   parser.on('-l', '--list', 'lists the available products') do |l|
     options[:product][:list] = l
+  end
+  parse.on('-ac', '--add-to-cart=[UUID]', "adds a product to the cart using the product's UUID") do |ac|
+    options[:cart][:add] = ac
   end
 end.parse!
 
