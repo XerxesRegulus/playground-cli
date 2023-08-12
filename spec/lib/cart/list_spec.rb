@@ -1,8 +1,6 @@
 require './spec/helper/cart_spec_helper.rb'
 require './lib/cart.rb'
 
-require 'pry'
-
 describe Cart, type: :cart do
   let(:temp_file_location) { './spec/temp/test_cart.json' }
 
