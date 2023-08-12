@@ -28,21 +28,20 @@ module Cart
   end
 
   def total_amount(cart_items)
-    output_text = ''
     total = cart_items.map { |cart_item| amount_price(cart_item['price'], cart_item['amount']) }.sum
 
     if total > 20
-      output_text += apply_discount(total)
+      apply_discount(total)
     else
-      output_text += "Your total amount is #{total}"
+      "Your total amount is #{total}"
     end
   end
 
   def apply_discount(total)
-    discount = discount_amount(total)
-    discounted_total = deduct_percent_from_total(discount[:amount], total).round(2)
+    discount_details = discount_amount(total)
+    discounted_total = deduct_percent_from_total(discount_details[:amount], total).round(2)
 
-    "\nDiscount Applied: #{discount[:amount] * 100}% off on total greater than $#{discount[:trigger]} \n\n" \
+    "\nDiscount Applied: #{discount_details[:amount] * 100}% off on total greater than $#{discount_details[:trigger]} \n\n" \
     "TOTAL: $#{sprintf('%.2f', discounted_total)}"
   end
 
