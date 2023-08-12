@@ -3,7 +3,7 @@ require 'json'
 module Product
   extend self
 
-  def list(_args)
+  def list(args = {})
     output_text = ''
     output_text += "Available Products: \n"
     output_text += "ID | Name | Price \n"

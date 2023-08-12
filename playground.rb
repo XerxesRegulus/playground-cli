@@ -22,5 +22,6 @@ end.parse!
 options.each do |klass, method_details|
   method_details.each do |method_name, args|
     puts Object.const_get(klass.capitalize).send(method_name, args)
+    puts "\n\n"
   end
 end

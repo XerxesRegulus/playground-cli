@@ -1,3 +1,5 @@
+require './lib/product.rb'
+
 module Cart
  module Add
   def add(index)

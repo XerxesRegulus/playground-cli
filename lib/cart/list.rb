@@ -2,12 +2,12 @@ require 'pry'
 
 module Cart
   module List
-    def list(_args)
+    def list(args = {})
       output_text = ''
       cart_items = parse_cart_contents
 
       if cart_items.nil? || cart_items.empty?
-        output_text = 'Your cart is currently empty '
+        return 'Your cart is currently empty'
       else
         output_text += "Products in Shopping Cart: \n"
         output_text += "# | Product Name | Amount | Price \n"
@@ -33,7 +33,7 @@ module Cart
     if total > 20
       apply_discount(total)
     else
-      "Your total amount is #{total}"
+      "Your total amount is $#{total}"
     end
   end
 
@@ -41,7 +41,7 @@ module Cart
     discount_details = discount_amount(total)
     discounted_total = deduct_percent_from_total(discount_details[:amount], total).round(2)
 
-    "\nDiscount Applied: #{discount_details[:amount] * 100}% off on total greater than $#{discount_details[:trigger]} \n\n" \
+    "\nDiscount Applied: #{convert_to_percent(discount_details[:amount])} off on total greater than $#{discount_details[:trigger]} \n\n" \
     "TOTAL: $#{sprintf('%.2f', discounted_total)}"
   end
 
@@ -61,4 +61,7 @@ module Cart
     total - (total * percent)
   end
 
+  def convert_to_percent(float)
+    "#{(float * 100).to_i}%"
+  end
 end
