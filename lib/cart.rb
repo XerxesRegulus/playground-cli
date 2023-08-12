@@ -1,12 +1,12 @@
 require 'json'
-
-require './lib/cart/add.rb'
+Dir['./lib/cart/*rb'].each { |file| require file }
 
 module Cart
   FILE_LOCATION = './cart.json'
 
   extend self
   extend Cart::Add
+  extend Cart::List
 
   private
 
