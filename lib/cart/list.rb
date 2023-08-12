@@ -1,5 +1,3 @@
-require 'pry'
-
 module Cart
   module List
     def list(args = {})

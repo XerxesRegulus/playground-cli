@@ -11,10 +11,10 @@ option_parser = OptionParser.new do |parser|
   parser.on('-l', '--list', 'lists the available products') do |l|
     options[:product][:list] = l
   end
-  parser.on('-a', '--add-to-cart PRODUCTID', "adds a product to the cart using the product's ID, you can find a product's id using --list") do |product_id|
+  parser.on('-a', '--add-to-cart PRODUCTID', "adds a product to the cart using the product's ID, you can find a product's id using --list. Example: playground -a 1") do |product_id|
     options[:cart][:add] = product_id
   end
-  parser.on('-c', '--cart-list', 'lists the current items in your cart with a total') do |c|
+  parser.on('-c', '--cart-list', 'lists the current items in your cart with a total amount that needs to be paid.') do |c|
     options[:cart][:list] = c
   end
 end.parse!
