@@ -6,7 +6,7 @@ module Cart
   FILE_LOCATION = './cart.json'
 
   def add(index)
-    return 'Invalid Product ID' if index.to_i < 1
+    return 'Invalid Product ID.' if index.to_i < 1
 
     output_text = ''
     product = Product.all[index.to_i - 1]
