@@ -1,5 +1,4 @@
 require 'json'
-require 'pry'
 
 module Cart
   extend self
