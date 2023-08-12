@@ -1,19 +1,21 @@
 require 'json'
 
-class Product
-  class << self
-    def list(*args)
-      product_file = File.read('./products.json')
-      @products_json ||= JSON.parse(product_file)
+module Product
+  extend self
 
-      output_text = ''
-      output_text += "Available Products: \n"
-      @products_json.each do |product|
-        output_text += "#{product['uuid']} : #{product['name']} : #{product['price']} \n"
-      end
-
-      puts output_text
-      output_text
+  def list(*args)
+    output_text = ''
+    output_text += "Available Products: \n"
+    output_text += "ID | Name | Price \n"
+    all.each_with_index do |product, index|
+      output_text += "#{index + 1} | #{product['name']} | #{product['price']} \n"
     end
+
+    output_text
+  end
+
+  def all
+    product_file = File.read('./products.json')
+    JSON.parse(product_file)
   end
 end
