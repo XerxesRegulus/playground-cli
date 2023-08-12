@@ -1,12 +1,15 @@
 require 'json'
+require 'pry'
 
 module Cart
   extend self
   FILE_LOCATION = './cart.json'
 
-  def add(uuid)
+  def add(index)
+    return 'Invalid Product ID' if index.to_i < 1
+
     output_text = ''
-    product = Product.all.filter{ |p| p['uuid'] == uuid.to_i }[0]
+    product = Product.all[index.to_i - 1]
 
     unless product.nil?
       cart_items = parse_cart_contents
