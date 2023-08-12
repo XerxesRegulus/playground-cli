@@ -10,7 +10,6 @@ module Product
       output_text += "#{product['uuid']} : #{product['name']} : #{product['price']} \n"
     end
 
-    puts output_text
     output_text
   end
 

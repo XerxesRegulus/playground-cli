@@ -12,7 +12,7 @@ module Cart
       cart_items = parse_cart_contents
       same_item = cart_items.select { |cart_item| cart_item['uuid'] == product['uuid'] }[0]
 
-      if same_item.empty?
+      if same_item.nil?
         cart_items << product.merge({"amount" => 1})
       else
         same_item_index = cart_items.find_index(same_item)
@@ -25,7 +25,7 @@ module Cart
       output_text = "Product not found. Please use the '-l' or '--list' option to list out the available products."
     end
 
-    puts output_text
+    output_text
   end
 
   private
