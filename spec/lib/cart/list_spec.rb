@@ -21,9 +21,12 @@ describe Cart, type: :cart do
           File.write(temp_file_location, [cart_item].to_json)
 
           cart_list = Cart.list
-          expect(cart_list).to match(/Products in Shopping Cart/)
-          expect(cart_list).to match(/Sample Cart Item/)
-          expect(cart_list).to match(/\nYour total amount is \$10.0/)
+          expect(cart_list).to eq(
+            "Products in Shopping Cart: \n" \
+            "# | Product Name | Amount | Price \n" \
+            "1 | Sample Cart Item | 1 | $10.00 \n" \
+            "Your total amount is $10.0"
+          )
         end
       end
 
@@ -33,8 +36,13 @@ describe Cart, type: :cart do
           File.write(temp_file_location, [cart_item].to_json)
 
           cart_list = Cart.list
-          expect(cart_list).to match(/10% off on total greater than \$20/)
-          expect(cart_list).to match(/\n\nTOTAL: \$18.90/)
+          expect(cart_list).to eq(
+            "Products in Shopping Cart: \n" \
+            "# | Product Name | Amount | Price \n" \
+            "1 | Sample Cart Item | 1 | $21.00 \n\n" \
+            "Discount Applied: 10% off on total greater than $20 \n\n" \
+            "TOTAL: $18.90"
+          )
         end
 
         it 'gives a discount of 15% for a total greater than $50' do
@@ -42,8 +50,13 @@ describe Cart, type: :cart do
           File.write(temp_file_location, [cart_item].to_json)
 
           cart_list = Cart.list
-          expect(cart_list).to match(/15% off on total greater than \$50/)
-          expect(cart_list).to match(/\n\nTOTAL: \$43.35/)
+          expect(cart_list).to eq(
+            "Products in Shopping Cart: \n" \
+            "# | Product Name | Amount | Price \n" \
+            "1 | Sample Cart Item | 1 | $51.00 \n\n" \
+            "Discount Applied: 15% off on total greater than $50 \n\n" \
+            "TOTAL: $43.35"
+          )
         end
 
         it 'gives a discount of 20% for a total greater than $100' do
@@ -51,8 +64,13 @@ describe Cart, type: :cart do
           File.write(temp_file_location, [cart_item].to_json)
 
           cart_list = Cart.list
-          expect(cart_list).to match(/20% off on total greater than \$100/)
-          expect(cart_list).to match(/\n\nTOTAL: \$80.80/)
+          expect(cart_list).to eq(
+            "Products in Shopping Cart: \n" \
+            "# | Product Name | Amount | Price \n" \
+            "1 | Sample Cart Item | 1 | $101.00 \n\n" \
+            "Discount Applied: 20% off on total greater than $100 \n\n" \
+            "TOTAL: $80.80"
+          )
         end
       end
 
@@ -62,9 +80,13 @@ describe Cart, type: :cart do
           File.write(temp_file_location, [cart_item].to_json)
 
           cart_list = Cart.list
-          expect(cart_list).to match(/Sample Cart Item | 11 | \$110.00/)
-          expect(cart_list).to match(/20% off on total greater than \$100/)
-          expect(cart_list).to match(/\n\nTOTAL: \$88.00/)
+          expect(cart_list).to eq(
+            "Products in Shopping Cart: \n" \
+            "# | Product Name | Amount | Price \n" \
+            "1 | Sample Cart Item | 11 | $110.00 \n\n" \
+            "Discount Applied: 20% off on total greater than $100 \n\n" \
+            "TOTAL: $88.00"
+          )
         end
       end
     end

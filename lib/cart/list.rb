@@ -44,15 +44,14 @@ module Cart
   end
 
   def discount_amount(total)
-    if total > 100
-      { amount: 0.20, trigger: 100 }
-    elsif total > 50
-      { amount: 0.15, trigger: 50 }
-    elsif total > 20
-      { amount: 0.10, trigger: 20 }
-    else
+    discount_arr = [
+      { amount: 0.20, trigger: 100},
+      { amount: 0.15, trigger: 50 },
+      { amount: 0.10, trigger: 20 },
       { amount: 0, trigger: 0 }
-    end
+    ]
+
+    discount_arr.find { |discount_details|  total > discount_details[:trigger] }
   end
 
   def deduct_percent_from_total(percent, total)
