@@ -2,26 +2,18 @@ require 'optparse'
 
 Dir['./lib/*rb'].each { |file| require file }
 
-options = {
-  product: {},
-  cart: {}
-}
 
-option_parser = OptionParser.new do |parser|
+OptionParser.new do |parser|
   parser.on('-l', '--list', 'lists the available products') do |l|
-    options[:product][:list] = l
+    puts Product.list
   end
-  parser.on('-a', '--add-to-cart PRODUCTID', "adds a product to the cart using the product's ID, you can find a product's id using --list. Example: playground -a 1") do |product_id|
-    options[:cart][:add] = product_id
+  parser.on('-a', '--add-to-cart PRODUCTNAME', "adds a product to the cart using the product's ID, you can find a product's id using --list") do |product_name|
+    puts Cart.add(product_name)
   end
-  parser.on('-c', '--cart-list', 'lists the current items in your cart with a total amount that needs to be paid.') do |c|
-    options[:cart][:list] = c
+  parser.on('-c', '--cart-list', 'lists the current items in your cart with a total') do |c|
+    puts Cart.list
+  end
+  parser.on('-r', '--remove-from-cart CARTINDEX', Integer, 'lists the current items in your cart with a total') do |ci|
+    puts Cart.remove(ci)
   end
 end.parse!
-
-options.each do |klass, method_details|
-  method_details.each do |method_name, args|
-    puts Object.const_get(klass.capitalize).send(method_name, args)
-    puts "\n\n"
-  end
-end

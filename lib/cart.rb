@@ -7,6 +7,7 @@ module Cart
   extend self
   extend Cart::Add
   extend Cart::List
+  extend Cart::Remove
 
   private
 
